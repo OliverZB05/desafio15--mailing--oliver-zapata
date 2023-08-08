@@ -235,7 +235,7 @@ app.get('/reset/:token/:timestamp', async (req, res) => {
     // Imprimir los valores de los parámetros de ruta
 
     // Verificar si el token es válido y no ha expirado
-   if (Date.now() - timestamp > 60 * 1000) { 
+   if (Date.now() - timestamp > 60 * 60 * 1000) { 
         // El enlace ha expirado
         // Mostrar un mensaje al usuario y ofrecerle la opción de solicitar un nuevo enlace
 
