@@ -174,16 +174,19 @@ app.post('/send-email', async (req, res) => {
     // Obtener la información del correo electrónico desde la solicitud HTTP
     const { email } = req.body;
 
-    // Imprimir los valores del correo electrónico y la nueva contraseña
-    console.log('Email:', email);
-
     // Verificar si el correo electrónico existe en la base de datos
     const user = await User.findOne({ email: email });
     if (!user) {
         // El correo electrónico no existe en la base de datos
         // Enviar una respuesta al cliente indicando que el correo electrónico no existe
         res.status(400).send('El correo electrónico no existe');
-        console.log('El correo electrónico no existe');
+
+        if (process.env.NODE_ENV === 'development') {
+            developmentLogger.log('error', 'El correo electrónico no existe');
+        } else {
+            productionLogger.log('error', 'El correo electrónico no existe');
+        }
+
         return;
     }
 
@@ -211,10 +214,13 @@ app.post('/send-email', async (req, res) => {
 
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-            console.log(error);
             res.sendStatus(500);
         } else {
-            console.log('Email enviado: ' + info.response);
+            if (process.env.NODE_ENV === 'development') {
+                developmentLogger.log('info', `Email enviado: ${info.response}`);
+            } else {
+                productionLogger.log('info', `Email enviado: ${info.response}`);
+            }
             res.sendStatus(200);
         }
     });
