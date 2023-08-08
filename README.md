@@ -1,4 +1,4 @@
-# desafio14--logs--oliver-zapata
+# desafio15--mailing--oliver-zapata
 
 ## Pasos para ejecutarlo
 
@@ -154,8 +154,8 @@ En este router se renderizan las vistas de registro y de login mostradas en las 
 - Se agrego un modelo de tickets y lógica para esa orden de compra
 - Se añadió el patrón de diseño TDD 
 - Se añadió faker con y dos nuevos métodos, un método "mockingproducts" para crear 50 productos usando faker, y otro método "deleteMockingProducts" para eliminar los 50 productos creados por faker
-
+- Se añadieron logs 
 
 ### Nuevas implementaciones
 
-- Se añadieron logs 
+- Se añadió un método para usar mailing
